@@ -57,9 +57,9 @@ const parseNote = (input) => {
   const headerVal = headerLine ? headerLine.split(" ").slice(1).join(' ') : false;
 
   const tagLines = splitLines.filter(
-    (el) => el.startsWith("[tag]") || el.startsWith("[]"),
+    (el) => el.startsWith("[tag]") || el.startsWith("[tags]"),
   );
-  const tagValues = tagLines.map((el) => el.split(" ")[1]);
+  const tagValues = tagLines.reduce((out, el) => [...out, ...el.split(" ").slice(1)], []);
 
   return { headerVal, tagValues };
 };

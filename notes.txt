@@ -27,6 +27,7 @@
     - note editor
         - start with a styled textarea input
         - submit with button click
+        - maybe add toggle to switch to preview mode (read/write toggle)
     - note viewer
         - all notes
             - default sort by date
