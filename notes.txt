@@ -1,0 +1,36 @@
+# note application
+
+## features
+
+- client side data
+        - no server
+    - data is importable/exportable by the user (WIP)
+    - local first data
+    - indexdb
+- full text search
+    - the goal is to allow notes to link
+        - obsidian
+        - logseq
+        - ect.
+    - maybe not full text search
+    - maybe just a really tagging system
+- plain text
+    - exportable/importable
+    - no special format
+    - markdown link no-render syntax
+        - ex: "[tags]:- name"
+    - markdown support
+
+## Roadmap
+
+- Basic UI
+    - note editor
+        - start with a styled textarea input
+        - submit with button click
+    - note viewer
+        - all notes
+            - default sort by date
+            - update notes schema to include created/updated at values
+        - filter
+            - by tag
+            - by date range

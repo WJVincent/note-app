@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notes App</title>
+    <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+    <script src="./index.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    </link>
+</head>
+
+<body>
+    <header>
+        <h1>Create a Note</h1>
+    </header>
+    <main>
+        <div id="note-list-container">
+            <div id="note-list-buttons">
+                <button>all notes</button>
+                <button>filter notes</button>
+            </div>
+            <div>
+                <ul id='note-list'></ul>
+            </div>
+        </div>
+        <div id="note-editor-container">
+            <textarea id='content'></textarea>
+            <button id="submit-note">submit</button>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+
+</html>

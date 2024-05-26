@@ -1,0 +1,35 @@
+:root {
+    --color-bg: #282828;
+    --color-green: #98971a;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-green);
+    height: 90vh;
+}
+
+header > h1 {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    height: 90%;
+    justify-content: space-around;
+}
+
+#note-list-container, #note-editor-container {
+    width: 45%; 
+    border: 1px solid var(--color-green);
+}
+
+#note-editor-container > textarea {
+    height: 90%;
+    width: 90%;
+    display: block;
+    margin: 5%;
+    background-color: #665c54;
+    color: white; 
+    resize: none;
+}
