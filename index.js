@@ -23,16 +23,13 @@ const addItem = async (content, tags, title) => {
 };
 
 const updateItem = async (id, changes) => {
-  const opts = {};
-
-  if (changes.content) opts.content = changes.content;
-  if (changes.title) opts.title = changes.title;
-  if (changes.tags) opts.tags = changes.tags;
-
-  await db.notes.update(id, {
-    ...opts,
-    updatedAt: new Date(),
-  });
+  const prevNote = await getItemById(id);
+  prevNote.updatedAt = new Date();
+  prevNote.title = changes.title;
+  prevNote.content = changes.content;
+  prevNote.tags = changes.tags;
+ 
+  await db.notes.put(prevNote);
 };
 
 const getItemById = async (id) => {
@@ -77,9 +74,9 @@ const populateNoteList = async () => {
 
     li.addEventListener("click", async () => {
       const note = await getItemById(li.dataset.id);
-      console.log({ oldContent: textContent.innerHTML, note});
       textContent.value = note.content;
       textContent.dataset.shouldUpdate = true;
+      textContent.dataset.id = li.dataset.id;
     });
     noteList.appendChild(li);
   }
@@ -93,7 +90,7 @@ addNoteButton.addEventListener("click", async () => {
   const { headerVal, tagValues } = parseNote(content);
 
   if (shouldUpdate === "true") {
-    console.log('eventually will run update func');
+    await updateItem(textContent.dataset.id, {content, title: headerVal, tags: tagValues });
   } else {
     await addItem(content, tagValues, headerVal);
   }
