@@ -3,17 +3,17 @@
 ## features
 
 - client side data
-        - no server
+        - no server - x
     - data is importable/exportable by the user (WIP)
-    - local first data
-    - indexdb
+    - local first data - x
+    - indexdb - z
 - full text search
     - the goal is to allow notes to link
         - obsidian
         - logseq
         - ect.
     - maybe not full text search
-    - maybe just a really tagging system
+    - maybe just a really tagging system - x
 - plain text
     - exportable/importable
     - no special format
@@ -25,13 +25,17 @@
 
 - Basic UI
     - note editor
-        - start with a styled textarea input
-        - submit with button click
+        - start with a styled textarea input - x
+        - submit with button click - x
         - maybe add toggle to switch to preview mode (read/write toggle)
+            - possibly styling it like this. textarea combined with pre/code tags. Write into textarea, view the code/pre tag.
+                - syntax highlighting handled by prismjs or something like it
+                - https://css-tricks.com/creating-an-editable-textarea-that-supports-syntax-highlighted-code/ 
+                - https://prismjs.com/  
     - note viewer
         - all notes
             - default sort by date
-            - update notes schema to include created/updated at values
+            - update notes schema to include created/updated at values - x
         - filter
-            - by tag
+            - by tag - x
             - by date range
