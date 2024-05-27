@@ -5,6 +5,8 @@ const searchButton = document.getElementById("search");
 const noteList = document.getElementById("note-list");
 const newNoteButton = document.getElementById("create-new");
 const filterButton = document.getElementById("filter-notes-button");
+const filterInput = document.getElementById("filter-notes-input");
+const allNotesButton = document.getElementById("all-notes-button");
 
 db.version(1).stores({
   notes: "++id, *tags, title, content, createdAt, updatedAt",
@@ -107,8 +109,14 @@ newNoteButton.addEventListener("click", () => {
 });
 
 filterButton.addEventListener("click", async () => {
-  const list = await getItemByTag("linux");
+  const searchInput = filterInput.value;
+  const list = await getItemByTag(searchInput);
   populateNoteList(list);
+});
+
+allNotesButton.addEventListener("click", async () => {
+  const allNotes = await getAll();
+  populateNoteList(allNotes);
 })
 
 document.addEventListener("DOMContentLoaded", async () => {
