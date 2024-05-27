@@ -4,6 +4,7 @@ const addNoteButton = document.getElementById("submit-note");
 const searchButton = document.getElementById("search");
 const noteList = document.getElementById("note-list");
 const newNoteButton = document.getElementById("create-new");
+const filterButton = document.getElementById("filter-notes-button");
 
 db.version(1).stores({
   notes: "++id, *tags, title, content, createdAt, updatedAt",
@@ -28,7 +29,7 @@ const updateItem = async (id, changes) => {
   prevNote.title = changes.title;
   prevNote.content = changes.content;
   prevNote.tags = changes.tags;
- 
+
   await db.notes.put(prevNote);
 };
 
@@ -37,13 +38,8 @@ const getItemById = async (id) => {
   return note;
 };
 
-const getItemByTag = (tag) => {
-  db.notes
-    .where("tags")
-    .equals(tag)
-    .toArray()
-    .then((res) => console.log(res));
-};
+const getItemByTag = async (tag) =>
+  await db.notes.where("tags").equals(tag).toArray();
 
 const getAll = async () => await db.notes.toArray();
 
@@ -51,23 +47,26 @@ const parseNote = (input) => {
   const splitLines = input.split("\n");
 
   const headerLine = splitLines.find((el) => el.startsWith("# "));
-  const headerVal = headerLine ? headerLine.split(" ").slice(1).join(' ') : false;
+  const headerVal = headerLine
+    ? headerLine.split(" ").slice(1).join(" ")
+    : false;
 
   const tagLines = splitLines.filter(
     (el) => el.startsWith("[tag]") || el.startsWith("[tags]"),
   );
-  const tagValues = tagLines.reduce((out, el) => [...out, ...el.split(" ").slice(1)], []);
+  const tagValues = tagLines.reduce(
+    (out, el) => [...out, ...el.split(" ").slice(1)],
+    [],
+  );
 
   return { headerVal, tagValues };
 };
 
-const populateNoteList = async () => {
-  const allNotes = await getAll();
-  // noteList.innerHTML = "";
-  Array.from(noteList.children).forEach((el) => el.remove());
+const populateNoteList = async (list) => {
+  noteList.innerHTML = "";
 
-  for (let i = 0; i < allNotes.length; i++) {
-    const note = allNotes[i];
+  for (let i = 0; i < list.length; i++) {
+    const note = list[i];
     const li = document.createElement("li");
     li.innerText = note.title;
     li.dataset.id = note.id;
@@ -90,11 +89,16 @@ addNoteButton.addEventListener("click", async () => {
   const { headerVal, tagValues } = parseNote(content);
 
   if (shouldUpdate === "true") {
-    await updateItem(textContent.dataset.id, {content, title: headerVal, tags: tagValues });
+    await updateItem(textContent.dataset.id, {
+      content,
+      title: headerVal,
+      tags: tagValues,
+    });
   } else {
     await addItem(content, tagValues, headerVal);
   }
-  await populateNoteList();
+  const allNotes = await getAll();
+  await populateNoteList(allNotes);
 });
 
 newNoteButton.addEventListener("click", () => {
@@ -102,9 +106,13 @@ newNoteButton.addEventListener("click", () => {
   textContent.dataset.shouldUpdate = false;
 });
 
+filterButton.addEventListener("click", async () => {
+  const list = await getItemByTag("linux");
+  populateNoteList(list);
+})
+
 document.addEventListener("DOMContentLoaded", async () => {
   textContent.dataset.shouldUpdate = false;
-  await populateNoteList();
+  const allNotes = await getAll();
+  await populateNoteList(allNotes);
 });
-
-
