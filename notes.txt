@@ -6,7 +6,7 @@
         - no server - x
     - data is importable/exportable by the user (WIP)
     - local first data - x
-    - indexdb - z
+    - indexdb - x
 - full text search
     - the goal is to allow notes to link
         - obsidian
@@ -28,7 +28,7 @@
         - start with a styled textarea input - x
         - submit with button click - x
         - maybe add toggle to switch to preview mode (read/write toggle)
-            - possibly styling it like this. textarea combined with pre/code tags. Write into textarea, view the code/pre tag.
+            - possibly styling it like in this article. textarea combined with pre/code tags. Write into textarea, view the code/pre tag.
                 - syntax highlighting handled by prismjs or something like it
                 - https://css-tricks.com/creating-an-editable-textarea-that-supports-syntax-highlighted-code/ 
                 - https://prismjs.com/  

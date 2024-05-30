@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Notes App</title>
     <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
-    <script src="./index.js" defer></script>
+    <script type='module' src="./index.js" defer></script>
     <link rel="stylesheet" href="./style.css">
     </link>
 </head>
@@ -19,8 +19,13 @@
         <div id="note-list-container">
             <div id="note-list-buttons">
                 <button id="all-notes-button">all notes</button>
-                <button id="filter-notes-button">filter notes</button>
-                <input id="filter-notes-input"></input>
+                <input list="tag-list" 
+                       id="filter-notes-input" 
+                       placeholder="filter notes by tag"
+                       onfocus="this.value='';"
+                       onchange='this.blur();'
+                ></input>
+                <datalist id="tag-list"></datalist>
                 <button id="create-new">new note</button>
             </div>
             <div>
