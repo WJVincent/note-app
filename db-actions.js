@@ -33,9 +33,9 @@ const getNoteById = async (id) => {
 };
 
 const getNoteByTag = async (tag) =>
-  await db.notes.where("tags").equals(tag).toArray();
+  await db.notes.where("tags").equals(tag).orderBy("updatedAt").reverse().toArray();
 
-const getAllNotes = async () => await db.notes.toArray();
+const getAllNotes = async () => await db.notes.orderBy("updatedAt").reverse().toArray();
 
 const parseNote = (input) => {
   const splitLines = input.split("\n");
@@ -63,7 +63,7 @@ const getAllTags = async (input) => {
 };
 
 const getAllNotesFromTagList = async (tagList) => {
-    const notes = await db.notes.where("tags").anyOf(tagList).distinct().toArray();
+    const notes = await db.notes.where("tags").anyOf(tagList).distinct().reverse().sortBy("updatedAt");
     return notes;
 }
 

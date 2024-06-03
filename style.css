@@ -33,3 +33,31 @@ main {
     color: white; 
     resize: none;
 }
+
+#note-list-buttons {
+    padding: 2%;
+    margin: 2%;
+}
+
+.note-li {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--color-green);
+    padding: 2%;
+    margin: 2%;
+}
+
+.note-li:hover {
+    background-color: var(--color-green);
+    color: var(--color-bg);
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}

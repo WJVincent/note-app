@@ -9,6 +9,8 @@ import {
   getAllNotesFromTagList
 } from "./db-actions.js";
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" ,"Oct", "Nov", "Dec"];
+
 const textContent = document.getElementById("content");
 const addNoteButton = document.getElementById("submit-note");
 const noteList = document.getElementById("note-list");
@@ -23,8 +25,19 @@ const populateNoteList = async (list) => {
   for (let i = 0; i < list.length; i++) {
     const note = list[i];
     const li = document.createElement("li");
-    li.innerText = note.title;
+    const titleSpan = document.createElement("span");
+    const updatedDateSpan = document.createElement("span");
+    const month = MONTHS[note.updatedAt.getMonth()];
+    const day = note.updatedAt.getDate();
+    const year = note.updatedAt.getFullYear();
+    
+    updatedDateSpan.innerText = `${month} ${day} ${year}`;
+    titleSpan.innerText = note.title;
     li.dataset.id = note.id;
+
+    li.setAttribute("class", "note-li");
+    li.append(titleSpan);
+    li.append(updatedDateSpan);
 
     li.addEventListener("click", async () => {
       const note = await getNoteById(li.dataset.id);
@@ -32,6 +45,7 @@ const populateNoteList = async (list) => {
       textContent.dataset.shouldUpdate = true;
       textContent.dataset.id = li.dataset.id;
     });
+
     noteList.appendChild(li);
   }
 };
