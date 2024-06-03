@@ -9,7 +9,7 @@ import {
   getAllNotesFromTagList
 } from "./db-actions.js";
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep" ,"Oct", "Nov", "Dec"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const textContent = document.getElementById("content");
 const addNoteButton = document.getElementById("submit-note");
@@ -18,6 +18,8 @@ const newNoteButton = document.getElementById("create-new");
 const filterInput = document.getElementById("filter-notes-input");
 const allNotesButton = document.getElementById("all-notes-button");
 const tagList = document.getElementById("tag-list");
+const modalCloseButton = document.getElementById("modal-close");
+const modal = document.getElementById("help-dialog")
 
 const populateNoteList = async (list) => {
   noteList.innerHTML = "";
@@ -30,7 +32,7 @@ const populateNoteList = async (list) => {
     const month = MONTHS[note.updatedAt.getMonth()];
     const day = note.updatedAt.getDate();
     const year = note.updatedAt.getFullYear();
-    
+
     updatedDateSpan.innerText = `${month} ${day} ${year}`;
     titleSpan.innerText = note.title;
     li.dataset.id = note.id;
@@ -100,6 +102,10 @@ allNotesButton.addEventListener("click", async () => {
   populateNoteList(allNotes);
 });
 
+modalCloseButton.addEventListener('click', () => {
+  modal.close();
+})
+
 document.addEventListener("DOMContentLoaded", async () => {
   textContent.dataset.shouldUpdate = false;
   const allNotes = await getAllNotes();
@@ -107,3 +113,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   await populateNoteList(allNotes);
   populateTagList(tags);
 });
+
+document.onkeydown = async (e) => {
+  if (e.key === '?' && e.ctrlKey === true && e.altKey === true) {
+    console.log(modal.open);
+   if(modal.open){
+     modal.close();
+   } else {
+     modal.showModal();
+   }
+  } else if (e.key === 'n' && e.ctrlKey === true && e.altKey === true) {
+    filterInput.value = "";
+    textContent.value = "";
+    textContent.dataset.shouldUpdate = false;
+  } else if (e.key === 'a' && e.ctrlKey === true && e.altKey === true) {
+    filterInput.value = "";
+    textContent.value = "";
+    const allNotes = await getAllNotes();
+    populateNoteList(allNotes);
+  }
+}

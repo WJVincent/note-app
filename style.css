@@ -17,6 +17,7 @@ main {
     display: flex;
     height: 90%;
     justify-content: space-around;
+    margin: 2%;
 }
 
 #note-list-container, #note-editor-container {
@@ -60,4 +61,12 @@ button {
 ul {
     margin: 0;
     padding: 0;
+}
+
+#keybinds {
+    text-align: center;
+}
+
+hr {
+    color: var(--color-green);
 }
