@@ -35,6 +35,11 @@ main {
     resize: none;
 }
 
+#note-editor-container > textarea::placeholder {
+    color: white;
+    opacity: 50%;
+}
+
 #note-list-buttons {
     padding: 2%;
     margin: 2%;
