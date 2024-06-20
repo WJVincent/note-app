@@ -2,7 +2,6 @@ import {
   addNote,
   updateNote,
   getNoteById,
-  getNoteByTag,
   parseNote,
   getAllNotes,
   getAllTags,
@@ -116,7 +115,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 document.onkeydown = async (e) => {
   if (e.key === '?' && e.ctrlKey === true && e.altKey === true) {
-    console.log(modal.open);
    if(modal.open){
      modal.close();
    } else {

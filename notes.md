@@ -34,8 +34,13 @@
                 - https://prismjs.com/  
     - note viewer
         - all notes
-            - default sort by date
+            - default sort by date -x
             - update notes schema to include created/updated at values - x
         - filter
             - by tag - x
-            - by date range
+            - by date range -?
+
+## Still TODO
+
+- []: full text search
+- []: style textarea
